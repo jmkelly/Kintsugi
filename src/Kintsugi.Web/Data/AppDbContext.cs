@@ -1,4 +1,4 @@
-using Kintsugi.Web.Models;
+using Kintsugi.Web.Features.Items;
 using Microsoft.EntityFrameworkCore;
 
 namespace Kintsugi.Web.Data;

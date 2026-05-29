@@ -1,14 +1,14 @@
 using Kintsugi.Web.Data;
-using Kintsugi.Web.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages(options =>
+{
+    options.RootDirectory = "/Features";
+});
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("Default")));
-builder.Services.AddScoped<IItemRepository, ItemRepository>();
-
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())

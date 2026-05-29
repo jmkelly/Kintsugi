@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Kintsugi.Web.Pages;
+namespace Kintsugi.Web.Features.Privacy;
 
 public class PrivacyModel : PageModel
 {
@@ -9,4 +9,3 @@ public class PrivacyModel : PageModel
     {
     }
 }
-
