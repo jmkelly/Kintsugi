@@ -1,0 +1,21 @@
+@page
+@model Kintsugi.Web.Pages.Items.IndexModel
+@{
+    ViewData["Title"] = "Items";
+}
+
+<h1>Items</h1>
+
+<form id="create-form"
+      asp-page-handler="Create"
+      hx-post hx-target="#item-list" hx-swap="outerHTML"
+      hx-on::after-request="this.reset()">
+    <div class="input-group mb-3">
+        <input type="text" name="title" class="form-control" placeholder="New item..." required />
+        <button class="btn btn-primary" type="submit">Add</button>
+    </div>
+</form>
+
+<div id="item-list">
+    @await Html.PartialAsync("_ItemList", Model.Items)
+</div>

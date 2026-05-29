@@ -1,0 +1,35 @@
+@model IReadOnlyList<Item>
+
+<ul id="item-list" class="list-group">
+    @foreach (var item in Model)
+    {
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>
+                @if (item.IsComplete)
+                {
+                    <s>@item.Title</s>
+                }
+                else
+                {
+                    @item.Title
+                }
+            </span>
+            <div class="btn-group btn-group-sm">
+                <button class="btn btn-outline-secondary"
+                        hx-post="/Items/Index?handler=ToggleComplete&id=@item.Id"
+                        hx-target="#item-list" hx-swap="outerHTML">
+                    @(item.IsComplete ? "Undo" : "Done")
+                </button>
+                <button class="btn btn-outline-danger"
+                        hx-post="/Items/Index?handler=Delete&id=@item.Id"
+                        hx-target="#item-list" hx-swap="outerHTML">
+                    Delete
+                </button>
+            </div>
+        </li>
+    }
+    @if (Model.Count == 0)
+    {
+        <li class="list-group-item text-muted">No items yet. Add one above.</li>
+    }
+</ul>
