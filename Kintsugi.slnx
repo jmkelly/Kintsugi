@@ -1,8 +1,4 @@
 <Solution>
-  <Folder Name="/src/">
-    <Project Path="src/Kintsugi.Web/Kintsugi.Web.csproj" />
-  </Folder>
-  <Folder Name="/tests/">
-    <Project Path="tests/Kintsugi.Tests/Kintsugi.Tests.csproj" />
-  </Folder>
+  <Project Path="Kintsugi.Web/Kintsugi.Web.csproj" />
+  <Project Path="Kintsugi.Tests/Kintsugi.Tests.csproj" />
 </Solution>

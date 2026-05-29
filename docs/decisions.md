@@ -72,7 +72,7 @@ This made features hard to reason about in isolation.
   data extensions, Razor Page, partial views).
 - Shared infrastructure (`AppDbContext`) stays in `Data/`.
 - Razor Pages root directory is set to `/Features`.
-- Tests mirror the feature structure under `tests/Features/<Name>/`.
+- Tests mirror the feature structure under `Kintsugi.Tests/Features/<Name>/`.
 
 **Consequences:**
 - A feature's complete implementation lives in one folder — easy to find,
