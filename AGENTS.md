@@ -9,30 +9,32 @@ refinement makes the codebase stronger and more beautiful.
 - HTMX 2.x — HTML-driven interactivity
 - SQLite + Entity Framework Core 10 — persistence
 - xUnit — testing
-- Fakes over mocks — in-memory service implementations for testing
+- Real DbContext with SQLite `:memory:` — no mocking frameworks or fakes
 - TDD — tests first, then production code
+- DDD — rich domain entities with encapsulated behavior, vertical slices
 
 ## Quick start
 
 ```bash
 cd kintsugi
-dotnet run --project src/Kintsugi.Web
+dotnet run --project Kintsugi.Web
 ```
 
 ## Project structure
 
 ```
-src/Kintsugi.Web/
-├── Data/          — EF Core DbContext
-├── Models/        — domain models
-├── Services/      — interfaces + real implementations
-├── Pages/         — Razor Pages + partial views
-├── Fakes/         — (shared with tests via linked files or namespace)
+Kintsugi.Web/
+├── Data/          — EF Core DbContext (shared infrastructure)
+├── Features/      — vertical slices (one per feature)
+│   ├── Items/     — domain entity, data extensions, page, partials
+│   ├── Home/
+│   ├── Privacy/
+│   └── Error/
 └── Program.cs
 
-tests/Kintsugi.Tests/
-├── Fakes/         — fake implementations of service interfaces
-├── Services/      — unit + integration tests
+Kintsugi.Tests/
+├── Features/      — unit tests mirroring feature structure
+│   └── Items/     — real DbContext with SQLite :memory:
 └── Pages/         — page model tests
 ```
 
@@ -43,5 +45,7 @@ tests/Kintsugi.Tests/
 - When you discover a recurring pattern, note it in docs/conventions.md.
 - Before starting a new type of task, check .opencode/skills/ — if no skill
   matches, consider creating one.
-- Write the test first. Every interface should have a fake for testing.
-- No mocking frameworks. Use Fake* classes.
+- Write the test first. Tests use a real `AppDbContext` backed by SQLite
+  `:memory:` — no fakes or mocking frameworks.
+- Design domain entities with encapsulated behavior — constructors enforce
+  invariants, methods like `Toggle()` replace bare property sets.

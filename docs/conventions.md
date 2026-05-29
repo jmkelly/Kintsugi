@@ -10,20 +10,29 @@ Add entries here as patterns emerge.
 
 ---
 
-## Architecture: service interface with fakes
+## Architecture: vertical slices + DDD
 
-Every service interface (`I*Repository`, `I*Service`) has two implementations:
-the real one (EF Core, HTTP client, etc.) and a fake (`Fake*`) that uses
-in-memory storage. Tests use the fake for speed; integration tests use the
-real implementation with SQLite `:memory:`.
+```
+Features/<Name>/  — entity, data extensions, Razor Page, partials
+Data/             — EF Core DbContext (shared infrastructure)
+```
 
-## Testing: fakes over mocks
+Every feature is self-contained in one folder. Page models inject
+`AppDbContext` directly. Use extension methods on `AppDbContext` for
+reusable query/command patterns within a feature.
 
-Do not use mocking frameworks. Create `Fake*` classes that implement the
-interface with simple in-memory state. This makes tests:
-- Readable (no setup/verify noise)
-- Resilient to refactoring (no brittle mock expectations)
-- Reusable across test classes
+## Domain entity: encapsulate behavior
+
+Entities protect their invariants through constructors and behavior methods.
+Avoid public property setters — use methods like `Toggle()` instead of
+`item.IsComplete = !item.IsComplete`. Make EF Core materialization possible
+via a private parameterless constructor and private property setters.
+
+## Testing: real DbContext with SQLite in-memory
+
+Do not use mocking frameworks or fakes. Tests create a real `AppDbContext`
+backed by a `SqliteConnection("DataSource=:memory:")`. This keeps tests fast,
+avoids fake upkeep, and exercises the real persistence path.
 
 ## Razor Pages: partial views for HTMX
 
