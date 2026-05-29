@@ -38,14 +38,28 @@ Kintsugi.Tests/
 └── Pages/         — page model tests
 ```
 
-## Important rules
+## Agent workflow
+
+Before writing any code, follow these steps in order:
+
+1. **Load the matching skill** — Use the skill tool to load the skill for
+   your task type (add-feature, fix-bug, refactor).
+2. **Read the auto-injected docs** — `docs/decisions.md` and
+   `docs/conventions.md` are already in your context. Read them carefully.
+3. **Study existing code** — If creating or modifying a feature, read an
+   existing complete feature directory (e.g. `Kintsugi.Web/Features/Items/`)
+   to understand layouts, conventions, and patterns first.
+4. **Write the test first** — Always write a failing test before production
+   code.
+5. **Verify** — Run `dotnet build && dotnet test` after making changes.
+6. **Document** — If you discovered a new pattern, add it to
+   `docs/conventions.md`; if the change affects architecture, add an ADR to
+   `docs/decisions.md`; if the task type might recur, improve the skill.
+
+## Rules
 
 - Keep things simple. Prefer boring, obvious code over clever code.
-- Before writing significant code, check docs/decisions.md for relevant ADRs.
-- When you discover a recurring pattern, note it in docs/conventions.md.
-- Before starting a new type of task, check .opencode/skills/ — if no skill
-  matches, consider creating one.
-- Write the test first. Tests use a real `AppDbContext` backed by SQLite
-  `:memory:` — no fakes or mocking frameworks.
 - Design domain entities with encapsulated behavior — constructors enforce
   invariants, methods like `Toggle()` replace bare property sets.
+- Write the test first. Tests use a real `AppDbContext` backed by SQLite
+  `:memory:` — no fakes or mocking frameworks.
