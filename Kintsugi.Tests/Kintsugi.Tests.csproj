@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Kintsugi.Web\Kintsugi.Web.csproj" />
+    <ProjectReference Include="..\Kintsugi.Web\Kintsugi.Web.csproj" />
   </ItemGroup>
 
 </Project>
