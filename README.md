@@ -44,6 +44,40 @@ npm install
 npm run dev
 ```
 
+## Using a template
+
+Each template is a standalone starter project with opencode agent config baked in.
+
+### Clone-as template (simplest)
+
+Use the whole repo, keep your chosen template, delete the rest:
+
+```bash
+git clone https://github.com/YOUR-ORG/Kintsugi.git my-app
+cd my-app
+rm -rf typescript .git          # keep C#
+# or: rm -rf c_sharp .git       # keep TypeScript
+(cd .opencode && npm install)   # opencode runtime deps
+```
+
+The `.opencode/` directory is already at the root — you're done.
+
+### Copy from a local clone
+
+```bash
+cp -r /path/to/Kintsugi/c_sharp /path/to/my-app      # or typescript
+cp -r /path/to/Kintsugi/.opencode /path/to/my-app/.opencode
+cd /path/to/my-app
+(cd .opencode && npm install)
+```
+
+The `.opencode/` directory provides:
+- **Skills** (`add-feature`, `fix-bug`, `refactor`) — loaded by your AI agent
+- **Commands** (e.g. `commit`) — custom agent workflows
+- **Runtime** (`@opencode-ai/plugin`) — enables opencode integration
+
+Templates ship with their own `opencode.json`, `AGENTS.md`, and `docs/` — no extra setup needed.
+
 ## Adding a new ecosystem
 
 1. Create a new directory at the root (e.g. `python/`, `rust/`).
