@@ -1,0 +1,28 @@
+<ul id="item-list" class="list-group">
+  <% items.forEach(item => { %>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <span>
+        <% if (item.isComplete) { %>
+          <s><%= item.title %></s>
+        <% } else { %>
+          <%= item.title %>
+        <% } %>
+      </span>
+      <div class="btn-group btn-group-sm">
+        <button class="btn btn-outline-secondary"
+                hx-post="/items/toggle" hx-vals='{"id": <%= item.id %>}'
+                hx-target="#item-list" hx-swap="outerHTML">
+          <%= item.isComplete ? "Undo" : "Done" %>
+        </button>
+        <button class="btn btn-outline-danger"
+                hx-post="/items/delete" hx-vals='{"id": <%= item.id %>}'
+                hx-target="#item-list" hx-swap="outerHTML">
+          Delete
+        </button>
+      </div>
+    </li>
+  <% }) %>
+  <% if (items.length === 0) { %>
+    <li class="list-group-item text-muted">No items yet. Add one above.</li>
+  <% } %>
+</ul>
