@@ -14,6 +14,8 @@ every fix and refinement makes the codebase stronger and more beautiful.
 |-----------|-------|-----------|
 | **C#** | .NET 10 + ASP.NET Core Razor Pages + HTMX + SQLite/EF Core + xUnit | [`c_sharp/`](c_sharp/) |
 | **TypeScript** | Node.js + Express + HTMX + SQLite/better-sqlite3 + Vitest | [`typescript/`](typescript/) |
+| **Go** | Go 1.24 + net/http + HTMX + SQLite/modernc.org + testing | [`go/`](go/) |
+| **Python** | Python 3.12 + FastAPI + Jinja2 + HTMX + SQLite/aiosqlite + pytest | [`python/`](python/) |
 
 ## Common philosophy
 
@@ -42,6 +44,15 @@ dotnet run --project Kintsugi.Web
 cd typescript
 npm install
 npm run dev
+
+# Go
+cd go
+go run ./cmd/kintsugi
+
+# Python
+cd python
+uv sync --extra dev
+uv run uvicorn src.main:app --reload
 ```
 
 ## Using a template
