@@ -1,0 +1,4 @@
+kintsugi
+*.db
+*.db-shm
+*.db-wal

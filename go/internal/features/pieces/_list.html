@@ -1,0 +1,29 @@
+{{define "features/pieces/_list.html"}}
+<ul id="piece-list" class="list-group">
+    {{range .Pieces}}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <span>
+            {{if .Restored}}
+            <s>{{.Title}}</s>
+            {{else}}
+            {{.Title}}
+            {{end}}
+        </span>
+        <div class="btn-group btn-group-sm">
+            <button class="btn btn-outline-secondary"
+                    hx-post="/pieces/restore" hx-vals='{"id":{{.ID}}}'
+                    hx-target="#piece-list" hx-swap="outerHTML">
+                {{if .Restored}}Undo{{else}}Restore{{end}}
+            </button>
+            <button class="btn btn-outline-danger"
+                    hx-post="/pieces/remove" hx-vals='{"id":{{.ID}}}'
+                    hx-target="#piece-list" hx-swap="outerHTML">
+                Remove
+            </button>
+        </div>
+    </li>
+    {{else}}
+    <li class="list-group-item text-muted">No pieces yet. Register one above.</li>
+    {{end}}
+</ul>
+{{end}}
