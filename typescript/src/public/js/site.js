@@ -1,4 +1,1 @@
-// Site-wide JavaScript
-document.addEventListener("DOMContentLoaded", () => {
-  // Placeholder for future interactivity
-});
+document.addEventListener("DOMContentLoaded", () => {});

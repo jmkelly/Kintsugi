@@ -11,15 +11,18 @@ router.get("/", (_req, res) => {
 
 export function errorHandler(
   err: Error,
-  _req: Request,
+  req: Request,
   res: Response,
   _next: NextFunction,
 ) {
-  console.error(err.stack);
+  const isDev = process.env.NODE_ENV !== "production";
+
+  console.error(`[ERROR] ${req.method} ${req.url}:`, err);
+
   res.status(500).render("features/error/error", {
     message:
-      process.env.NODE_ENV === "development"
-        ? err.message
+      isDev
+        ? `${err.message}\n\n${err.stack}`
         : "An error occurred",
   });
 }

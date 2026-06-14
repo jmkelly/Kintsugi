@@ -40,7 +40,7 @@ src/
 │   ├── items/
 │   ├── home/
 │   └── error/
-├── views/          — shared EJS layouts
+├── views/          — shared Handlebars layouts
 └── public/         — static assets (css, js, lib)
 
 tests/

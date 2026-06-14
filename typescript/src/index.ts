@@ -1,34 +1,59 @@
 import express from "express";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import expressLayouts from "express-ejs-layouts";
-import { getDb } from "./db.ts";
-import itemsRouter from "./features/items/index.ts";
-import homeRouter from "./features/home/index.ts";
-import errorRouter, { errorHandler } from "./features/error/index.ts";
+import { engine } from "express-handlebars";
+import { getDb } from "./db.js";
+import piecesRouter from "./features/pieces/index.js";
+import homeRouter from "./features/home/index.js";
+import errorRouter, { errorHandler } from "./features/error/index.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 const PORT = process.env.PORT ?? 3000;
+const cssVersion = Date.now();
+const isDev = process.env.NODE_ENV !== "production";
 
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "..", "src", "views"));
+function log(level: string, msg: string, ...args: unknown[]) {
+  const ts = new Date().toISOString();
+  const line = [`[${ts}] [${level}]`, msg, ...args.map(a => typeof a === "object" ? JSON.stringify(a) : a)].join(" ");
+  if (level === "ERROR") console.error(line);
+  else console.log(line);
+}
 
-app.use(expressLayouts);
-app.set("layout", "layout");
+app.engine("hbs", engine({
+  extname: ".hbs",
+  layoutsDir: path.join(__dirname, "views", "layouts"),
+  partialsDir: [
+    path.join(__dirname, "views"),
+    __dirname,
+  ],
+  defaultLayout: "layout",
+  helpers: {
+    cssVersion: () => cssVersion,
+    hxVals: (id: number) => JSON.stringify({ id }),
+  },
+}));
+app.set("view engine", "hbs");
+app.set("views", __dirname);
 
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "..", "src", "public")));
+app.use(express.static(path.join(__dirname, "public")));
+
+app.use((req, _res, next) => {
+  log("INFO", `${req.method} ${req.url}`);
+  next();
+});
 
 app.use("/", homeRouter);
-app.use("/items", itemsRouter);
+app.use("/pieces", piecesRouter);
 app.use("/error", errorRouter);
 
 app.use(errorHandler);
 
 getDb();
+log("INFO", `cssVersion = ${cssVersion}`);
 
 app.listen(PORT, () => {
-  console.log(`Kintsugi running at http://localhost:${PORT}`);
+  log("INFO", `Kintsugi running at http://localhost:${PORT} (${isDev ? "development" : "production"})`);
 });

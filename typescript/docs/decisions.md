@@ -27,7 +27,7 @@ template's philosophy.
 **Consequences:**
 - Simple project structure — no SPA, no client-side framework, no JS toolchain
 - HTMX lets us add interactivity with HTML attributes; most handlers return
-  rendered EJS partials
+   rendered Handlebars partials
 - Raw SQL via better-sqlite3 keeps the data layer transparent and debuggable
 - Integration tests with real `:memory:` connection validate the data layer
 - TDD ensures every piece of code has a corresponding test and the design
@@ -42,7 +42,7 @@ and testable, avoiding anemic data objects mixed with persistence logic.
 
 **Decision:**
 - Three-layer structure: **Domain** (entities), **Data** (SQL +
-  repository functions), **Presentation** (Express routes + EJS views).
+  repository functions), **Presentation** (Express routes + Handlebars views).
 - Domain entities encapsulate behavior — static `create()` factory enforces
   invariants, methods like `toggle()` replace property-mutation patterns.
 - No repository abstraction — route handlers import repository functions
@@ -64,7 +64,7 @@ feature touch files spread across folders.
 **Decision:**
 - Move to **vertical slice** organisation: each feature lives in its own
   `src/features/<Name>/` directory containing everything it needs (entity,
-  repository, routes, EJS views).
+  repository, routes, Handlebars views).
 - Shared infrastructure (`db.ts`) stays at the `src/` level.
 - Tests mirror the feature structure under `tests/features/<Name>/`.
 
