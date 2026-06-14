@@ -58,7 +58,7 @@ Before writing any code, follow these steps in order:
 
 ## Rules
 
-- Keep things simple. Prefer boring, obvious code over clever code.
+- Keep things simple. Prefer obvious code over clever code.
 - Design domain entities with encapsulated behavior — static factories enforce
   invariants, methods like `toggle()` replace bare property sets.
 - Write the test first. Tests use a real better-sqlite3 `:memory:` connection
