@@ -1,0 +1,27 @@
+<ul id="piece-list" class="piece-list">
+  {{#each pieces}}
+    <li class="piece-item{{#if restored}} restored{{/if}}">
+      <span class="piece-title{{#if restored}} restored{{/if}}">
+        {{#if restored}}
+          <s>{{title}}</s>
+        {{else}}
+          {{title}}
+        {{/if}}
+      </span>
+      <div class="piece-actions">
+        <button class="btn-icon"
+                hx-post="/pieces/toggle" hx-vals='{{{hxVals id}}}'
+                hx-target="#piece-list" hx-swap="outerHTML">
+          {{#if restored}}Undo{{else}}Restore{{/if}}
+        </button>
+        <button class="btn-icon danger"
+                hx-post="/pieces/remove" hx-vals='{{{hxVals id}}}'
+                hx-target="#piece-list" hx-swap="outerHTML">
+          Remove
+        </button>
+      </div>
+    </li>
+  {{else}}
+    <li class="empty-state">No pieces yet. Register one above.</li>
+  {{/each}}
+</ul>

@@ -13,7 +13,7 @@ Add entries here as patterns emerge.
 ## Architecture: vertical slices + DDD
 
 ```
-src/features/<Name>/  — entity, repository, routes, EJS views
+src/features/<Name>/  — entity, repository, routes, views
 src/db.ts             — SQLite connection factory (shared infrastructure)
 ```
 
@@ -25,7 +25,7 @@ patterns within a feature.
 
 Entities protect their invariants through static factory methods and behavior
 methods. Avoid public property assignment — use methods like `toggle()` instead
-of `item.isComplete = !item.isComplete`. Use a static `create()` factory
+of `piece.restored = !piece.restored`. Use a static `describe()` factory
 instead of `new`.
 
 ## Testing: real connection with better-sqlite3 :memory:
@@ -34,13 +34,20 @@ Do not use mocking frameworks or fakes. Tests create a real better-sqlite3
 `:memory:` connection via `getDb()`. This keeps tests fast, avoids fake
 upkeep, and exercises the real persistence path.
 
-## EJS partials for HTMX
+## Handlebars partials for HTMX
 
 HTMX handlers (POST route handlers) return a rendered partial view
 prefixed with `_`. The partial is also callable from the main page on
-initial load via `<%- include(...) %>`.
+initial load via `{{> path/to/_partial }}`.
 
 ## Naming: HTMX handler routes
 
-HTMX handler routes are named `/<feature>/<action>` (e.g. `POST /items/create`)
+HTMX handler routes are named `/<feature>/<action>` (e.g. `POST /pieces/register`)
 and return HTML partials. They match the `hx-post` URL used in templates.
+
+## Domain naming: thematic consistency
+
+Entities and features are named after the Kintsugi craft. Use domain-specific
+language — "piece" instead of "item", "register" instead of "create",
+"remove" instead of "delete". This keeps the code aligned with the project's
+identity.

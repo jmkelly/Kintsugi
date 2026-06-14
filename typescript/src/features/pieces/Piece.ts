@@ -1,33 +1,33 @@
-export class Item {
+export class Piece {
   constructor(
     public readonly id: number,
     public title: string,
-    public isComplete: boolean,
+    public restored: boolean,
     public readonly createdAt: Date,
   ) {}
 
-  static create(title: string): Item {
+  static describe(title: string): Piece {
     if (!title || title.trim().length === 0) {
-      throw new Error("Title cannot be empty");
+      throw new Error("A piece must have a name");
     }
-    return new Item(0, title.trim(), false, new Date());
+    return new Piece(0, title.trim(), false, new Date());
   }
 
   toggle(): void {
-    this.isComplete = !this.isComplete;
+    this.restored = !this.restored;
   }
 
   rename(title: string): void {
     if (!title || title.trim().length === 0) {
-      throw new Error("Title cannot be empty");
+      throw new Error("A piece must have a name");
     }
     this.title = title.trim();
   }
 }
 
-export type ItemRow = {
+export type PieceRow = {
   id: number;
   title: string;
-  is_complete: number;
+  restored: number;
   created_at: string;
 };

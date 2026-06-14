@@ -1,0 +1,15 @@
+<div class="page-header">
+  <h1>Pieces</h1>
+  <p>Ceramic pieces awaiting restoration</p>
+</div>
+
+<form class="create-form"
+      hx-post="/pieces/register" hx-target="#piece-list" hx-swap="outerHTML"
+      hx-on::after-request="this.reset()">
+  <input type="text" name="title" placeholder="Name a piece..." required />
+  <button type="submit">Register</button>
+</form>
+
+<div id="piece-list">
+  {{> features/pieces/_pieceList pieces=pieces}}
+</div>
