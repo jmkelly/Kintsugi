@@ -1,0 +1,11 @@
+{% extends "templates/layouts/base.html" %}
+
+{% block title %}{{ code }} — Kintsugi{% endblock %}
+
+{% block content %}
+<div class="error-page">
+    <h1>{{ code }}</h1>
+    <p>{{ message }}</p>
+    <a href="/" class="button">Return home</a>
+</div>
+{% endblock %}

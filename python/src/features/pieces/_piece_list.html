@@ -1,0 +1,29 @@
+<ul id="piece-list" class="piece-list">
+    {% for piece in pieces %}
+    <li class="piece{% if piece.completed %} completed{% endif %}">
+        <span class="piece-title">{{ piece.title }}</span>
+        <div class="piece-actions">
+            <button
+                hx-post="/pieces/toggle"
+                hx-vals='{"id": {{ piece.id }}}'
+                hx-target="#piece-list"
+                hx-swap="outerHTML"
+                class="toggle"
+            >
+                {{ "Complete" if not piece.completed else "Redo" }}
+            </button>
+            <button
+                hx-post="/pieces/remove"
+                hx-vals='{"id": {{ piece.id }}}'
+                hx-target="#piece-list"
+                hx-swap="outerHTML"
+                class="remove"
+            >
+                Remove
+            </button>
+        </div>
+    </li>
+    {% else %}
+    <li class="empty">No pieces yet. Register your first piece above.</li>
+    {% endfor %}
+</ul>

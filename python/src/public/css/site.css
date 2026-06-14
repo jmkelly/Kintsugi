@@ -1,0 +1,198 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&display=swap");
+
+:root {
+    --gold: #c9a96e;
+    --gold-light: #e8d5a3;
+    --cream: #faf6f0;
+    --dark: #2c2416;
+    --muted: #8a8070;
+    --danger: #c44a4a;
+    --radius: 8px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: "Inter", system-ui, sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+nav {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid var(--gold-light);
+}
+
+nav .logo {
+    font-family: "DM Serif Display", serif;
+    font-size: 1.4rem;
+    color: var(--dark);
+    text-decoration: none;
+}
+
+nav a:not(.logo) {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+nav a:not(.logo):hover { color: var(--dark); }
+
+main {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+}
+
+.hero { text-align: center; }
+
+.hero h1 {
+    font-family: "DM Serif Display", serif;
+    font-size: 3.5rem;
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+}
+
+.hero .subtitle {
+    font-family: "DM Serif Display", serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+}
+
+.hero .description {
+    color: var(--muted);
+    font-size: 0.95rem;
+    max-width: 480px;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
+}
+
+.button {
+    display: inline-block;
+    padding: 0.7rem 1.8rem;
+    background: var(--gold);
+    color: #fff;
+    text-decoration: none;
+    border-radius: var(--radius);
+    font-weight: 500;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+}
+
+.button:hover { background: #b8944f; }
+
+.pieces h1 {
+    font-family: "DM Serif Display", serif;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.register-form {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.register-form input {
+    flex: 1;
+    padding: 0.7rem 1rem;
+    border: 1px solid var(--gold-light);
+    border-radius: var(--radius);
+    font-size: 0.9rem;
+    background: #fff;
+}
+
+.register-form input:focus {
+    outline: none;
+    border-color: var(--gold);
+}
+
+.register-form button {
+    padding: 0.7rem 1.5rem;
+    background: var(--gold);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.register-form button:hover { background: #b8944f; }
+
+.piece-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.piece {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.8rem 1rem;
+    background: #fff;
+    border-radius: var(--radius);
+    border: 1px solid var(--gold-light);
+}
+
+.piece.completed .piece-title {
+    text-decoration: line-through;
+    color: var(--muted);
+}
+
+.piece-title { font-size: 0.95rem; }
+
+.piece-actions { display: flex; gap: 0.4rem; }
+
+.piece-actions button {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.8rem;
+    border: 1px solid var(--gold-light);
+    border-radius: var(--radius);
+    background: #fff;
+    cursor: pointer;
+    color: var(--muted);
+}
+
+.piece-actions .toggle:hover {
+    border-color: var(--gold);
+    color: var(--dark);
+}
+
+.piece-actions .remove:hover {
+    border-color: var(--danger);
+    color: var(--danger);
+}
+
+.empty {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.9rem;
+    padding: 2rem;
+}
+
+.error-page {
+    text-align: center;
+    padding: 4rem 0;
+}
+
+.error-page h1 {
+    font-family: "DM Serif Display", serif;
+    font-size: 5rem;
+    color: var(--gold);
+}
+
+.error-page p {
+    color: var(--muted);
+    margin-bottom: 2rem;
+}

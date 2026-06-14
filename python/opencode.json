@@ -1,0 +1,13 @@
+{
+  "project_type": "Kintsugi Python",
+  "agents": [
+    {
+      "name": "default",
+      "instructions": [
+        "Read AGENTS.md",
+        "Read docs/conventions.md",
+        "Read docs/decisions.md"
+      ]
+    }
+  ]
+}
